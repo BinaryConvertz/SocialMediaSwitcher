@@ -1,4 +1,4 @@
 # Social Media Switcher
 
 ---------------------
-  Functionallity   
+    Functionallity   
