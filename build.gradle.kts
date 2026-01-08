@@ -16,8 +16,10 @@ repositories {
 
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
-    intellijPlatform {
-        intellijIdea("2025.2.4")
+
+    intellijPlatform{
+
+        intellijIdea("2025.3")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 
         // Add plugin dependencies for compilation here:
@@ -25,7 +27,9 @@ dependencies {
 
         bundledPlugin("com.intellij.java")
     }
+
 }
+
 
 intellijPlatform {
     pluginConfiguration {

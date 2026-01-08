@@ -7,6 +7,8 @@ import com.intellij.ui.content.ContentFactory
 import java.awt.Desktop
 import java.net.URI
 import javax.swing.JButton
+import javax.swing.JCheckBox
+import javax.swing.JLabel
 
 class MyToolWindowFactory : ToolWindowFactory {
     override fun shouldBeAvailable(project: Project) = true
@@ -19,32 +21,76 @@ class MyToolWindowFactory : ToolWindowFactory {
 
     class MyToolWindow {
 
+
         private fun openDesktop(textURL: URI?) {
             Desktop.getDesktop().browse((textURL))
         }
 
+        private fun visible(jButton: JButton, isActive: Boolean) {
+
+            jButton.isVisible = isActive
+        }
+
+
         private val content = JBPanel<JBPanel<*>>().apply {
 
+            val continueButton = JButton("Continue")
             val button = JButton("Twitter")
             val googleButton = JButton("Google")
             val ytButton = JButton("YouTube")
+            val check = JCheckBox("Active")
+            val labelEnabled = JLabel("Enabled")
 
-            ytButton.addActionListener {
 
-                openDesktop(URI.create("https://www.youtube.com"))
+            continueButton.addActionListener {
+
+                add(labelEnabled)
+                add(check)
+
+                if (check.isSelected) {
+
+
+                    googleButton.addActionListener {
+                        openDesktop(URI.create("https://www.google.com"))
+                    }
+
+                    ytButton.addActionListener {
+                        openDesktop(URI.create("https://www.youtube.com"))
+                    }
+
+                    button.addActionListener {
+                        openDesktop(URI.create("https://www.x.com"))
+                    }
+
+                    visible(googleButton, true)
+                    visible(ytButton, true)
+                    visible(button, true)
+
+                    check.isVisible = false
+                    labelEnabled.text = "Enabled"
+                    visible(continueButton, false)
+
+                }
+
+                if (!check.isSelected) {
+
+                    labelEnabled.text = "Disabled\n"
+
+                }
             }
 
-            googleButton.addActionListener {
-                openDesktop(URI.create("https://www.google.com"))
-            }
 
-            button.addActionListener {
-                openDesktop(URI.create("https://www.x.com"))
-            }
+            visible(googleButton, false)
+            visible(ytButton, false)
+            visible(button, false)
+            visible(continueButton, true)
 
+            check.isVisible = true
             add(googleButton)
             add(ytButton)
             add(button)
+            add(continueButton)
+
         }
 
         fun getContent(): JBPanel<JBPanel<*>> = content
