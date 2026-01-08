@@ -1,6 +1,6 @@
 # Social Media Switcher
 
-<img />
+<img src="image.png"/>
 
 
 --------------------
