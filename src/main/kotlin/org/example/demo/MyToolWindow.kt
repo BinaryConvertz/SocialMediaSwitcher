@@ -32,9 +32,16 @@ class MyToolWindowFactory : ToolWindowFactory {
 
 
             val isActiveWindow = Visible(isActive)
-            jButton.isVisible = isActiveWindow.isActive
-        }
 
+            if (isActiveWindow.isActive) {
+                jButton.isVisible = isActive
+
+            } else {
+                 jButton.isVisible = !isActive
+
+            }
+
+        }
 
         private val content = JBPanel<JBPanel<*>>().apply {
 
