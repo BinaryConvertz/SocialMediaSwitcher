@@ -19,6 +19,8 @@ class MyToolWindowFactory : ToolWindowFactory {
         toolWindow.contentManager.addContent(content)
     }
 
+    data class Visible(val isActive: Boolean)
+
     class MyToolWindow {
 
 
@@ -28,7 +30,9 @@ class MyToolWindowFactory : ToolWindowFactory {
 
         private fun visible(jButton: JButton, isActive: Boolean) {
 
-            jButton.isVisible = isActive
+
+            val isActiveWindow = Visible(isActive)
+            jButton.isVisible = isActiveWindow.isActive
         }
 
 
